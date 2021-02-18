@@ -82,10 +82,10 @@ The evaluation method chosen is a self-evaluation based on the following indicat
 - [ ] Syntactic rigor: I was able to translate the processes I imagined into javascript syntax.
 - [ ] Logical thinking: Through iterations and trial and error, I was able to find a logical path that works to address the issues raised by the client's request. Specifically:
   - [ ] I was able to generate the 2 inline data graphs.
-        - [ ] I was able to generate the "remote data" graph.
+   - [ ] I was able to generate the "remote data" graph.
   - [ ] I was able to build a callback function to process remote data (received via ajax).
-        - [ ] I was able to make the realtime graph refresh in real time.
-        - [ ] I was able to display the detailed data when I hover the mouse.
+   - [ ] I was able to make the realtime graph refresh in real time.
+   - [ ] I was able to display the detailed data when I hover the mouse.
  
 5. Debugging:
 - [ ] I use the console to understand what is happening and compare what I am trying to program with what the machine is doing.
