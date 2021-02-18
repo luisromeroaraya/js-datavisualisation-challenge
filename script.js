@@ -43,23 +43,23 @@ var remoteChart = new Chart(remoteContainer, {
 
 // GET FUNCTIONS //
 
-getColumn = (n) => {
+getColumn = (table, x, y) => {
     var array = [];
-    for (var i=2; i < firstTable.rows.length; i++) {
-        if (n == 1) {
-            array.push(firstTable.rows.item(i).cells.item(n).innerHTML);
+    for (var i=y; i < table.rows.length; i++) {
+        if (x == 1) {
+            array.push(table.rows.item(i).cells.item(x).innerHTML);
         }
         else {
-            array.push(parseFloat(firstTable.rows.item(i).cells.item(n).innerHTML));
+            array.push(parseFloat(table.rows.item(i).cells.item(x).innerHTML));
         }
     }
     return array;
 }
 
-getLine = (n) => {
+getLine = (table, x, y) => {
     var array = [];
-    for (var i=2; i < firstTable.rows.item(1).cells.length; i++) {
-        array.push(parseFloat(firstTable.rows.item(n).cells.item(i).innerHTML));
+    for (var i=y; i < table.rows.item(1).cells.length; i++) {
+        array.push(parseFloat(table.rows.item(x).cells.item(i).innerHTML));
     }
     return array;
 }
@@ -91,15 +91,14 @@ var firstYears = [];
 for (var i=2; i < firstTable.rows.item(1).cells.length; i++) {
     firstYears.push(firstTable.rows.item(1).cells.item(i).innerHTML);
 }
-var firstCountries = getColumn(1);
+var firstCountries = getColumn(table1, 1, 2);
 var firstData = [];
 for (var i=2; i<firstYears.length+2; i++) {
-    firstData.push(getColumn(i));
+    firstData.push(getColumn(table1, i, 2));
 }
 var firstDataSet = [];
 for (var i=0; i<firstYears.length; i++) {
     firstDataSet.push({label: firstYears[i], data: firstData[i], borderColor: colorArray[i], backgroundColor: colorArray[i], fill: false})
-    console.log(firstData[i]);
 }
 
 // CREATE FIRST INLINE CHART //
@@ -126,17 +125,17 @@ secondTarget[2].appendChild(secondCanvas);
 // GET SECOND TABLE DATA //
 var secondTable = document.getElementById("table2");
 var secondYears = [];
-for (var i=2; i < secondTable.rows.item(1).cells.length; i++) {
-    secondYears.push(secondTable.rows.item(1).cells.item(i).innerHTML);
+for (var i=2; i < secondTable.rows.item(0).cells.length; i++) {
+    secondYears.push(secondTable.rows.item(0).cells.item(i).innerHTML);
 }
-var secondCountries = getColumn(1);
+var secondCountries = getColumn(table2, 1, 1);
 var secondData = [];
-for (var i=2; i<secondCountries.length+2; i++) {
-    secondData.push(getLine(i));
+for (var i=2; i<secondYears.length+2; i++) {
+    secondData.push(getColumn(table2, i, 1));
 }
 var secondDataSet = [];
 for (var i=0; i<secondYears.length; i++) {
-    secondDataSet.push({label: secondYears[i], data: secondData[i], borderColor: colorArray[i], fill: false})
+    secondDataSet.push({label: secondYears[i], data: secondData[i], borderColor: colorArray[i], backgroundColor: colorArray[i], fill: false})
 }
 
 // CREATE SECOND INLINE CHART //
@@ -146,5 +145,10 @@ var secondChart = new Chart(secondContainer, {
     data: {
         labels: secondCountries,
         datasets: secondDataSet
+    },
+    options: {
+        legend: {
+           position: 'right' // place legend on the right side of chart
+        }
     }
 });
