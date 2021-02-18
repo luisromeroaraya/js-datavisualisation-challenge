@@ -94,4 +94,4 @@ The evaluation method chosen is a self-evaluation based on the following indicat
 - [ ] If I disable javascript, the user experience is satisfactory, the user has access to data and content
 - [ ] If I enable javascript, the tables are enhanced with an interactive graph.
 
-## Link to [my challenge](http://luisromeroaraya.github.io/js-datavisualisation-challenge)
+## Link to [my challenge](https://luisromeroaraya.github.io/js-datavisualisation-challenge/)
