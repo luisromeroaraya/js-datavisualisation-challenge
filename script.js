@@ -93,21 +93,27 @@ for (var i=2; i < firstTable.rows.item(1).cells.length; i++) {
 }
 var firstCountries = getColumn(1);
 var firstData = [];
-for (var i=2; i<firstCountries.length+2; i++) {
-    firstData.push(getLine(i));
+for (var i=2; i<firstYears.length+2; i++) {
+    firstData.push(getColumn(i));
 }
 var firstDataSet = [];
-for (var i=0; i<firstCountries.length; i++) {
-    firstDataSet.push({label: firstCountries[i], data: firstData[i], borderColor: colorArray[i], fill: false})
+for (var i=0; i<firstYears.length; i++) {
+    firstDataSet.push({label: firstYears[i], data: firstData[i], borderColor: colorArray[i], backgroundColor: colorArray[i], fill: false})
+    console.log(firstData[i]);
 }
 
 // CREATE FIRST INLINE CHART //
 var firstContainer = document.getElementById("firstChart");
 var firstChart = new Chart(firstContainer, {
-    type: 'line',
+    type: 'bar',
     data: {
-        labels: firstYears,
+        labels: firstCountries,
         datasets: firstDataSet
+    },
+    options: {
+        legend: {
+           position: 'right' // place legend on the right side of chart
+        }
     }
 });
 
