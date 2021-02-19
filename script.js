@@ -6,51 +6,38 @@ remoteCanvas.id = "remoteChart";
 var remoteTarget = document.getElementsByTagName("h1");
 remoteTarget[0].appendChild(remoteCanvas);
 
-
 // GET REMOTE DATA //
-var labels;
-var values;
-var xhttp = new XMLHttpRequest();
-xhttp.onreadystatechange = function() {
-    if (this.readyState == 4 && this.status == 200) {
-        var json = JSON.parse(this.response);
-        // Map json labels  back to values array
-        labels = json.map(function (e) {
-            return e.person.name;
-        });
-        // Map json values back to values array
-        values = json.map(function (e) {
-            return (e.finalWorth / 1000); // Divide to billions in units of ten
-        });
-    }
-};
-xhttp.open("GET", "https://forbes400.herokuapp.com/api/forbes400?limit=10", false);
-xhttp.send();
-
-// CREATE REMOTE CHART //
-
-var remoteContainer = document.getElementById("remoteChart");
-var remoteChart = new Chart(remoteContainer, {
-    type: 'horizontalBar',
-    data: {
-        labels: labels,
-        datasets: [{
-                label: "Title",
-                data: values,
-                backgroundColor: ['rgb(54, 162, 235)',
-                    'rgb(54, 162, 235)',
-                    'rgb(54, 162, 235)',
-                    'rgb(54, 162, 235)',
-                    'rgb(54, 162, 235)',
-                    'rgb(54, 162, 235)',
-                    'rgb(54, 162, 235)',
-                    'rgb(54, 162, 235)',
-                    'rgb(54, 162, 235)',
-                    'rgb(54, 162, 235)',
-                ],
-        }],
-    }
-});
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            var json = JSON.parse(this.response);
+            var remoteLabels = json.map(function (e) {
+                console.log(e[0]);
+                return e[0];
+            });
+            var remoteValues = json.map(function (e) {
+                console.log(e[1]);
+                return e[1];
+            });
+            // CREATE REMOTE CHART //
+            var remoteContainer = document.getElementById("remoteChart");
+            var remoteChart = new Chart(remoteContainer, {
+                type: 'line',
+                data: {
+                    labels: remoteLabels,
+                    datasets: [{
+                        data: remoteValues,
+                        borderWidth: 1,
+                        borderColor: "red",
+                        backgroundColor: "orange",
+                        fill: false
+                    }]
+                },
+            });
+        }
+    };
+    xhttp.open("GET", "https://canvasjs.com/services/data/datapoints.php?xstart=1&ystart=10&length=10&type=json", false);
+    xhttp.send();
 
 // GET FUNCTIONS //
 
@@ -67,6 +54,7 @@ getColumn = (table, x, y) => {
     return array;
 }
 
+
 getLine = (table, x, y) => {
     var array = [];
     for (var i=y; i < table.rows.item(1).cells.length; i++) {
@@ -74,7 +62,7 @@ getLine = (table, x, y) => {
     }
     return array;
 }
-
+	
 // RANDOM COLOR ARRAY //
 
 var colorArray = ['rgba(255, 102, 51, 1)', 'rgba(255, 179, 153, 1)', 'rgba(255, 51, 255, 1)', 'rgba(255, 255, 153, 1)', 'rgba(0, 179, 230, 1)', 
