@@ -5,17 +5,24 @@ var remoteCanvas = document.createElement("canvas");
 remoteCanvas.id = "remoteChart";
 var remoteTarget = document.getElementsByTagName("h1");
 remoteTarget[0].appendChild(remoteCanvas);
+var remoteLabels = [];
+var remoteValues = [];
+
+// SET INTERVAL //
 
 // GET REMOTE DATA //
+setInterval(function() {
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
+        var remoteLabels = [];
+        var remoteValues = [];
         if (this.readyState == 4 && this.status == 200) {
             var json = JSON.parse(this.response);
-            var remoteLabels = json.map(function (e) {
+            remoteLabels = json.map(function (e) {
                 console.log(e[0]);
                 return e[0];
             });
-            var remoteValues = json.map(function (e) {
+            remoteValues = json.map(function (e) {
                 console.log(e[1]);
                 return e[1];
             });
@@ -38,6 +45,8 @@ remoteTarget[0].appendChild(remoteCanvas);
     };
     xhttp.open("GET", "https://canvasjs.com/services/data/datapoints.php?xstart=1&ystart=10&length=10&type=json", false);
     xhttp.send();
+    }, 1000
+);
 
 // GET FUNCTIONS //
 
