@@ -66,16 +66,30 @@ getLine = (table, x, y) => {
 
 // RANDOM COLOR ARRAY //
 
-var colorArray = ['#FF6633', '#FFB399', '#FF33FF', '#FFFF99', '#00B3E6', 
-		  '#E6B333', '#3366E6', '#999966', '#99FF99', '#B34D4D',
-		  '#80B300', '#809900', '#E6B3B3', '#6680B3', '#66991A', 
-		  '#FF99E6', '#CCFF1A', '#FF1A66', '#E6331A', '#33FFCC',
-		  '#66994D', '#B366CC', '#4D8000', '#B33300', '#CC80CC', 
-		  '#66664D', '#991AFF', '#E666FF', '#4DB3FF', '#1AB399',
-		  '#E666B3', '#33991A', '#CC9999', '#B3B31A', '#00E680', 
-		  '#4D8066', '#809980', '#E6FF80', '#1AFF33', '#999933',
-		  '#FF3380', '#CCCC00', '#66E64D', '#4D80CC', '#9900B3', 
-		  '#E64D66', '#4DB380', '#FF4D4D', '#99E6E6', '#6666FF'];
+var colorArray = ['rgba(255, 102, 51, 1)', 'rgba(255, 179, 153, 1)', 'rgba(255, 51, 255, 1)', 'rgba(255, 255, 153, 1)', 'rgba(0, 179, 230, 1)', 
+		  'rgba(230, 179, 51, 1)', 'rgba(51, 102, 230, 1)', 'rgba(153, 153, 102, 1)', 'rgba(153, 255, 153, 1)', 'rgba(179, 77, 77, 1)',
+		  'rgba(128, 179, 0, 1)', 'rgba(128, 153, 0, 1)', 'rgba(230, 179, 179, 1)', 'rgba(102, 128, 179, 1)', 'rgba(102, 153, 26, 1)', 
+		  'rgba(255, 153, 230, 1)', 'rgba(204, 255, 26, 1)', 'rgba(255, 26, 102, 1)', 'rgba(230, 51, 26, 1)', 'rgba(51, 255, 204, 1)',
+		  'rgba(102, 153, 77, 1)', 'rgba(179, 102, 204, 1)', 'rgba(77, 128, 0, 1)', 'rgba(179, 51, 0, 1)', 'rgba(204, 128, 204, 1)', 
+		  'rgba(102, 102, 77, 1)', 'rgba(153, 26, 255, 1)', 'rgba(230, 102, 255, 1)', 'rgba(77, 179, 255, 1)', 'rgba(26, 179, 153, 1)',
+		  'rgba(230, 102, 179, 1)', 'rgba(51, 153, 26, 1)', 'rgba(204, 153, 153, 1)', 'rgba(179, 179, 26, 1)', 'rgba(0, 230, 128, 1)', 
+		  'rgba(77, 128, 102, 1)', 'rgba(128, 153, 128, 1)', 'rgba(230, 255, 128, 1)', 'rgba(26, 255, 51, 1)', 'rgba(153, 153, 51, 1)',
+		  'rgba(255, 51, 128, 1)', 'rgba(204, 204, 0, 1)', 'rgba(102, 230, 77, 1)', 'rgba(77, 128, 204, 1)', 'rgba(153, 0, 179, 1)', 
+		  'rgba(230, 77, 102, 1)', 'rgba(77, 179, 128, 1)', 'rgba(255, 77, 77, 1)', 'rgba(153, 230, 230, 1)', 'rgba(102, 102, 255, 1)'
+];
+
+var backgroundcolorArray = ['rgba(255, 102, 51, 0.5)', 'rgba(255, 179, 153, 0.5)', 'rgba(255, 51, 255, 0.5)', 'rgba(255, 255, 153, 0.5)', 'rgba(0, 179, 230, 0.5)', 
+		  'rgba(230, 179, 51, 0.5)', 'rgba(51, 102, 230, 0.5)', 'rgba(153, 153, 102, 0.5)', 'rgba(153, 255, 153, 0.5)', 'rgba(179, 77, 77, 0.5)',
+		  'rgba(128, 179, 0, 0.5)', 'rgba(128, 153, 0, 0.5)', 'rgba(230, 179, 179, 0.5)', 'rgba(102, 128, 179, 0.5)', 'rgba(102, 153, 26, 0.5)', 
+		  'rgba(255, 153, 230, 0.5)', 'rgba(204, 255, 26, 0.5)', 'rgba(255, 26, 102, 0.5)', 'rgba(230, 51, 26, 0.5)', 'rgba(51, 255, 204, 0.5)',
+		  'rgba(102, 153, 77, 0.5)', 'rgba(179, 102, 204, 0.5)', 'rgba(77, 128, 0, 0.5)', 'rgba(179, 51, 0, 0.5)', 'rgba(204, 128, 204, 0.5)', 
+		  'rgba(102, 102, 77, 0.5)', 'rgba(153, 26, 255, 0.5)', 'rgba(230, 102, 255, 0.5)', 'rgba(77, 179, 255, 0.5)', 'rgba(26, 179, 153, 0.5)',
+		  'rgba(230, 102, 179, 0.5)', 'rgba(51, 153, 26, 0.5)', 'rgba(204, 153, 153, 0.5)', 'rgba(179, 179, 26, 0.5)', 'rgba(0, 230, 128, 0.5)', 
+		  'rgba(77, 128, 102, 0.5)', 'rgba(128, 153, 128, 0.5)', 'rgba(230, 255, 128, 0.5)', 'rgba(26, 255, 51, 0.5)', 'rgba(153, 153, 51, 0.5)',
+		  'rgba(255, 51, 128, 0.5)', 'rgba(204, 204, 0, 0.5)', 'rgba(102, 230, 77, 0.5)', 'rgba(77, 128, 204, 0.5)', 'rgba(153, 0, 179, 0.5)', 
+		  'rgba(230, 77, 102, 0.5)', 'rgba(77, 179, 128, 0.5)', 'rgba(255, 77, 77, 0.5)', 'rgba(153, 230, 230, 0.5)', 'rgba(102, 102, 255, 0.5)'
+];
+
 
 // INLINE DATA CHARTS //
 
@@ -98,7 +112,7 @@ for (var i=2; i<firstYears.length+2; i++) {
 }
 var firstDataSet = [];
 for (var i=0; i<firstYears.length; i++) {
-    firstDataSet.push({label: firstYears[i], data: firstData[i], borderColor: colorArray[i], backgroundColor: colorArray[i], fill: false})
+    firstDataSet.push({label: firstYears[i], data: firstData[i], borderWidth: 1, borderColor: colorArray[i], backgroundColor: backgroundcolorArray[i]})
 }
 
 // CREATE FIRST INLINE CHART //
@@ -135,7 +149,7 @@ for (var i=2; i<secondYears.length+2; i++) {
 }
 var secondDataSet = [];
 for (var i=0; i<secondYears.length; i++) {
-    secondDataSet.push({label: secondYears[i], data: secondData[i], borderColor: colorArray[i], backgroundColor: colorArray[i], fill: false})
+    secondDataSet.push({label: secondYears[i], data: secondData[i], borderWidth: 1, borderColor: colorArray[i], backgroundColor: backgroundcolorArray[i]})
 }
 
 // CREATE SECOND INLINE CHART //
