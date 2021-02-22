@@ -139,10 +139,10 @@ var firstYears = [];
 for (var i=2; i < firstTable.rows.item(1).cells.length; i++) {
     firstYears.push(firstTable.rows.item(1).cells.item(i).innerHTML);
 }
-var firstCountries = getColumn(table1, 1, 2);
+var firstCountries = getColumn(firstTable, 1, 2);
 var firstData = [];
 for (var i=2; i<firstYears.length+2; i++) {
-    firstData.push(getColumn(table1, i, 2));
+    firstData.push(getColumn(firstTable, i, 2));
 }
 var firstDataSet = [];
 for (var i=0; i<firstYears.length; i++) {
