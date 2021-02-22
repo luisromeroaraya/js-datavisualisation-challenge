@@ -7,23 +7,18 @@ var remoteTarget = document.getElementsByTagName("h1");
 remoteTarget[0].appendChild(remoteCanvas);
 var remoteLabels = [];
 var remoteValues = [];
-
-// SET INTERVAL //
+var remoteCounter = 10;
 
 // GET REMOTE DATA //
-setInterval(function() {
     var xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = function() {
-        var remoteLabels = [];
-        var remoteValues = [];
-        if (this.readyState == 4 && this.status == 200) {
-            var json = JSON.parse(this.response);
-            remoteLabels = json.map(function (e) {
-                console.log(e[0]);
+    xhttp.open("GET", "https://canvasjs.com/services/data/datapoints.php?xstart=1&ystart=10&length=10&type=json", true); 
+    xhttp.responseType = "json";
+    xhttp.onload = () => {
+        if (xhttp.readyState == 4 && xhttp.status == 200) {
+            remoteLabels = xhttp.response.map(function(e) {
                 return e[0];
             });
-            remoteValues = json.map(function (e) {
-                console.log(e[1]);
+            remoteValues = xhttp.response.map(function (e) {
                 return e[1];
             });
             // CREATE REMOTE CHART //
@@ -34,6 +29,7 @@ setInterval(function() {
                     labels: remoteLabels,
                     datasets: [{
                         data: remoteValues,
+                        label: "Live Update",
                         borderWidth: 1,
                         borderColor: "red",
                         backgroundColor: "orange",
@@ -42,11 +38,39 @@ setInterval(function() {
                 },
             });
         }
-    };
-    xhttp.open("GET", "https://canvasjs.com/services/data/datapoints.php?xstart=1&ystart=10&length=10&type=json", false);
+    }
     xhttp.send();
-    }, 1000
-);
+    updateChart();
+
+function updateChart() {
+    var xhr = new XMLHttpRequest();
+    xhr.open("GET", "https://canvasjs.com/services/data/datapoints.php?xstart="+(remoteCounter=remoteCounter+1)+"&ystart=10&length=1&type=json", true); 
+    xhr.responseType = "json";
+    xhr.onload = () => {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+            remoteLabels.push(xhr.response[0][0]);
+            remoteValues.push(xhr.response[0][1]);
+            // CREATE REMOTE CHART //
+            var remoteContainer = document.getElementById("remoteChart");
+            var remoteChart = new Chart(remoteContainer, {
+                type: 'line',
+                data: {
+                    labels: remoteLabels,
+                    datasets: [{
+                        data: remoteValues,
+                        label: "Live Update",
+                        borderWidth: 1,
+                        borderColor: "red",
+                        backgroundColor: "orange",
+                        fill: false
+                    }]
+                },
+            });
+        }
+    }
+    xhr.send();
+    setTimeout(function(){updateChart()}, 1000);
+}
 
 // GET FUNCTIONS //
 
