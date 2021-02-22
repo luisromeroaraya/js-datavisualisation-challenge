@@ -7,11 +7,11 @@ var remoteTarget = document.getElementsByTagName("h1");
 remoteTarget[0].appendChild(remoteCanvas);
 var remoteLabels = [];
 var remoteValues = [];
-var remoteCounter = 10;
+var remoteCounter = 20;
 
 // GET REMOTE DATA //
     var xhttp = new XMLHttpRequest();
-    xhttp.open("GET", "https://canvasjs.com/services/data/datapoints.php?xstart=1&ystart=10&length=10&type=json", true); 
+    xhttp.open("GET", "https://canvasjs.com/services/data/datapoints.php?xstart=1&ystart=10&length=20&type=json", true); 
     xhttp.responseType = "json";
     xhttp.onload = () => {
         if (xhttp.readyState == 4 && xhttp.status == 200) {
@@ -48,6 +48,8 @@ function updateChart() {
     xhr.responseType = "json";
     xhr.onload = () => {
         if (xhr.readyState == 4 && xhr.status == 200) {
+            remoteLabels.shift();
+            remoteValues.shift();
             remoteLabels.push(xhr.response[0][0]);
             remoteValues.push(xhr.response[0][1]);
             // CREATE REMOTE CHART //
